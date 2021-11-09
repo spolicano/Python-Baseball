@@ -1,6 +1,6 @@
 import os
 import glob
-import pandas as pd 
+import pandas as pd
 
 game_files = glob.glob(os.path.join(os.getcwd(), 'games', '*.EVE'))
 games_files.sort()
@@ -15,7 +15,7 @@ games = pd.concat(game_frames)
 games.loc[games['multi5'] == '??', 'mutli5'] = ''
 
 identifiers = games['multi2'].str.extract(r'(.LS(\d{4})\d{5})')
-identifiers = identifiers.fillna(method='ffill')
+identifiers = identifiers.fillna(method='fill')
 identifiers.columns = ['game_id', 'year']
 
 games = pd.concat([games, identifiers], axis=1, sort=False)
